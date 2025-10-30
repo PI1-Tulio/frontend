@@ -2,11 +2,10 @@
   width: 397px;
   height: 100px;
   background-color: #FFFFFF;
-  border: 1px solid #E5E7EB; 
-  
+  border: 1px solid #E5E7EB;   
   position: relative; 
-  
   margin-bottom: 16px;
+  flex-shrink: 0;
 }
 
 .dropdown {
