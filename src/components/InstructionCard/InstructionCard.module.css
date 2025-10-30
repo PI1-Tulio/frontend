@@ -1,0 +1,78 @@
+.cardContainer {
+  width: 397px;
+  height: 100px;
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB; 
+  
+  position: relative; 
+  
+  margin-bottom: 16px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  width: 86px;
+  height: 64px;
+}
+
+.title {
+  position: absolute;
+  top: 17px;
+  left: 118px;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  
+  margin: 0;
+  width: 100px;
+  height: 20px;
+}
+
+.actionTextDefault {
+  position: absolute;
+  left: 118px;
+  bottom: 27px;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; 
+  font-size: 12px;
+  
+  margin: 0;
+  width: 230px; 
+}
+
+.actionTextFollow {
+  position: absolute;
+  left: 118px;
+  bottom: 27px;
+  
+  font-family: 'Inter', sans-serif;
+  font-weight: 400; 
+  font-size: 12px;
+  
+  margin: 0;
+  width: 110px; 
+  height: 20px; 
+}
+
+.cmInput {
+  position: absolute;
+  right: 16px;
+  bottom: 17px;
+  
+  width: 142px;
+  height: 40px;
+}
+
+.trashIcon {
+  position: absolute;
+  top: 17px;
+  right: 11px;
+  
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
