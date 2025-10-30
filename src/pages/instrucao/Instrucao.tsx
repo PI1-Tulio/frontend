@@ -4,7 +4,20 @@ import AddButton from '../../components/Button/AddButton';
 import CancelButton from '../../components/CancelButton/CancelButton';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
 import InstructionCard from '../../components/InstructionCard/InstructionCard';
-import React, { useState, useRef, use } from 'react'; 
+import React, { useState, useRef } from 'react'; 
+import { 
+  DndContext, 
+  closestCenter,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 
 type Instruction = {
   id: number;
@@ -13,8 +26,21 @@ type Instruction = {
 export function Instrucao() {
   
   const [instructions, setInstructions] = useState<Instruction[]>([]);
-  
   const nextId = useRef(1);
+  
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 5,
+      },
+    }),
+    useSensor(TouchSensor, {
+      activationConstraint: {
+        delay: 100,
+        tolerance: 5,
+      },
+    })
+  );
 
   const handleAddClick = () => {
     const newInstruction: Instruction = {
@@ -42,6 +68,20 @@ export function Instrucao() {
     );
   };
 
+ const handleDragEnd = (event: any) => {
+    const { active, over } = event;
+
+    if (!over || active.id === over.id) {
+      return;
+    }
+
+    setInstructions((currentInstructions) => {
+      const oldIndex = currentInstructions.findIndex(inst => inst.id === active.id);
+      const newIndex = currentInstructions.findIndex(inst => inst.id === over.id);
+
+      return arrayMove(currentInstructions, oldIndex, newIndex);
+    });
+  };
 
   return (
     <>
@@ -53,19 +93,31 @@ export function Instrucao() {
           {instructions.length === 0 ? (
             <p className={styles.subtitle}>As instruções aparecem aqui!</p>
           ) : (
-            
-            <div className={styles.cardListWrapper}>
-              {instructions.map((inst, index) => (
-                <InstructionCard 
-                  key={inst.id} 
-                  id={inst.id}
-                  instructionNumber={index + 1}
-                  onDelete={handleDeleteCard}
-                />
-              ))}
-            </div>
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext 
+                // Passamos um array *apenas dos IDs*
+                items={instructions.map(inst => inst.id)}
+                strategy={verticalListSortingStrategy}
+              >
+                <div className={styles.cardListWrapper}>
+                  {instructions.map((inst, index) => (
+                    <InstructionCard 
+                      key={inst.id} 
+                      id={inst.id}
+                      instructionNumber={index + 1} 
+                      onDelete={handleDeleteCard}
+                    />
+                  ))}
+                </div>
+              </SortableContext>
+            </DndContext>
           
           )}
+
         </div>
         <div className={styles.buttonWrapper}>
           <CancelButton onClick={handleCancelClick} />

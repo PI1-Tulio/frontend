@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import styles from './InstructionCard.module.css';
 import TrashIcon from '../../assets/icons/trash-icon.svg';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 interface InstructionCardProps {
   id: number; 
@@ -20,6 +22,21 @@ const ACTION_TEXT: Record<ActionType, string> = {
 export function InstructionCard({ id, instructionNumber, onDelete }: InstructionCardProps) {
 
   const [selectedAction, setSelectedAction] = useState<ActionType>('select');
+
+  const {
+    attributes,
+    listeners,
+    setNodeRef, 
+    transform,  
+    transition, 
+  } = useSortable({ id: id }); 
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+ 
+ 
   const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedAction(event.target.value as ActionType);
    };
@@ -29,7 +46,13 @@ export function InstructionCard({ id, instructionNumber, onDelete }: Instruction
   };
 
   return (
-    <div className={styles.cardContainer}>
+    <div 
+      className={styles.cardContainer}
+      ref={setNodeRef} 
+      style={style}      
+      {...attributes}    
+      {...listeners}     
+    >
       
       <select 
         className={styles.dropdown}
