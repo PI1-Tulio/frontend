@@ -4,7 +4,7 @@ import Instrucao from './pages/instrucao/Instrucao';
 function App() {
   return (
     <Routes>
-      {<Route path="/instrucao" element={<Instrucao />} />}
+      {<Route path="/" element={<Instrucao />} />}
     </Routes>
   )
 }
