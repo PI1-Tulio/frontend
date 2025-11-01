@@ -2,8 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 32px; 
+  justify-content: space-between;
+
   flex-grow: 1;
+
+  gap: 32px;
+  padding: 32px;
 }
 
 .contentWrapper {
@@ -14,12 +18,10 @@
 }
 
 .buttonWrapper {
-  margin-top: auto; 
-  
-  display: flex;          
-  flex-direction: row;    
-  align-items: center;    
-  
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
   gap: 16px;
   max-width: 400px;
   width: 100%;
@@ -45,10 +47,7 @@
 .cardListWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  margin-top: 70px; 
-  overflow-y: auto;
-  max-height: calc(100vh - 380px); 
+  align-items: center;
   gap: 16px;
   max-width: 400px;
   width: 100%;
