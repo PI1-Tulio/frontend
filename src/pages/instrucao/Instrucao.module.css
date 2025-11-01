@@ -1,6 +1,4 @@
 .instrucaoContainer {
-  background-color: #E7E6E6;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px; 
+  padding-top: 80px;
 }
 
 .buttonWrapper {
@@ -28,10 +26,10 @@
 
 .title {
   font-family: 'Inter', sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   font-size: 50px;
   text-align: center;
-  color: #313131; 
+  color: #313131;
 }
 
 .subtitle {

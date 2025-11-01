@@ -3,13 +3,11 @@ import styles from './AddButton.module.css';
 
 import PlusIcon from '../../assets/icons/plus_icon.svg';
 
-interface AddButtonProps {
-  onClick: () => void;
-}
+type AddButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
 
-export function AddButton({ onClick }: AddButtonProps) {
+export function AddButton(attributes: AddButtonProps) {
   return (
-    <button className={styles.addButton} onClick={onClick}>
+    <button className={styles.addButton} {...attributes}>
       <img
         src={PlusIcon}
         alt="Adicionar"
