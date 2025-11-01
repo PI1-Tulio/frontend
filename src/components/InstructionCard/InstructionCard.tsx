@@ -1,27 +1,40 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styles from './InstructionCard.module.css';
 import TrashIcon from '../../assets/icons/trash-icon.svg';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
 interface InstructionCardProps {
-  id: number; 
-  instructionNumber: number;
-  onDelete: (id: number) => void;
+ id: number;
+ instructionNumber: number;
+ action: 'move' | 'turn';
+ value: number;
+ onDelete: (id: number) => void;
+ onUpdate: (id: number, action: 'move' | 'turn', value: number) => void;
 }
 
-type ActionType = 'select' | 'follow' | 'left' | 'right';
+export function InstructionCard({ id, instructionNumber, action, value, onDelete, onUpdate }: InstructionCardProps) {
 
-const ACTION_TEXT: Record<ActionType, string> = {
-  select: "Escolha uma ação",
-  follow: "Seguir em frente",
-  left: "Virar à esquerda",
-  right: "Virar à direita",
-};
+ const handleActionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const newAction = event.target.value as 'move' | 'turn';
+  onUpdate(id, newAction, newAction === 'move' ? value : 0);
+ };
 
-export function InstructionCard({ id, instructionNumber, onDelete }: InstructionCardProps) {
+ const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const newValue = event.target.value ? parseInt(event.target.value.replaceAll(/\D/g, "")) : 0;
 
-  const [selectedAction, setSelectedAction] = useState<ActionType>('select');
+  if (!isNaN(newValue)) {
+   if (action === 'move') {
+    onUpdate(id, action, newValue);
+   } else {
+    onUpdate(id, action, newValue > 0 ? 1 : 0);
+   }
+  }
+ };
+
+ const handleDeleteClick = () => {
+  onDelete(id);
+ };
 
   const {
     attributes,
@@ -35,64 +48,62 @@ export function InstructionCard({ id, instructionNumber, onDelete }: Instruction
     transform: CSS.Transform.toString(transform),
     transition,
   };
- 
- 
-  const handleDropdownChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedAction(event.target.value as ActionType);
-   };
 
-  const handleDeleteClick = () => {
-    onDelete(id);
-  };
-
-  return (
-    <div 
+ return (
+  <div 
       className={styles.cardContainer}
       ref={setNodeRef} 
       style={style}      
       {...attributes}    
-      {...listeners}     
+      {...listeners}
     >
-      
-      <select 
-        className={styles.dropdown}
-        value={selectedAction}      
-        onChange={handleDropdownChange}
-      >
-        <option value="select">Ação</option>
-        <option value="follow">↑ Seguir em frente</option>
-        <option value="left">← Virar à esquerda</option>
-        <option value="right">→ Virar à direita</option>
-      </select>
+   <div className={styles.instructionSelectors}>
+    <select
+     className={styles.dropdown}
+     value={action}
+     onChange={handleActionChange}
+    >
+     <option value="move">↑ Mover</option>
+     <option value="turn">↺ Girar</option>
+    </select>
 
-      <h3 className={styles.title}>Instrução {instructionNumber}</h3>
-
-    {selectedAction === 'follow' ? (
-        <>
-          <p className={styles.actionTextFollow}>
-            {ACTION_TEXT.follow}
-          </p>
-          <input 
-            type="number" 
-            placeholder="cm" 
-            className={styles.cmInput} 
-          />
-        </>
-      ) : (
-        <>
-          <p className={styles.actionTextDefault}>
-            {ACTION_TEXT[selectedAction]}
-          </p>
-        </>
-      )}
-
-      <img 
-        src={TrashIcon} 
-        alt="Excluir"
-        className={styles.trashIcon} 
-        onClick={handleDeleteClick} />
+    <div>
+     <h3 className={styles.title}>Instrução {instructionNumber}</h3>
+     {action === 'move' ? (
+      <>
+       <div className={styles.valueInputContainer}>
+        <input
+         type="text"
+         className={styles.valueInput}
+         value={value}
+         onChange={handleValueChange}
+        />
+        <span>passos</span>
+       </div>
+      </>
+     ) : (
+      <>
+       <div className={styles.valueInputContainer}>
+        <select
+         className={styles.directionSelect}
+         value={value}
+         onChange={(e) => onUpdate(id, action, parseInt(e.target.value))}
+        >
+         <option value={0}>Esquerda</option>
+         <option value={1}>Direita</option>
+        </select>
+       </div>
+      </>
+     )}
     </div>
-  );
-}
+   </div>
 
-export default InstructionCard;
+   <button
+    className={styles.trashButton}
+    onClick={handleDeleteClick}
+   >
+    <img src={TrashIcon} alt="Excluir instrução" />
+   </button>
+  </div>
+ );
+}

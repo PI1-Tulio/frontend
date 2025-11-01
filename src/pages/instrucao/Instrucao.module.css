@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 75px;
+  padding-bottom: 32px; 
 }
 
 .contentWrapper {
@@ -12,16 +12,18 @@
   flex-direction: column;
   align-items: center;
   padding-top: 80px; 
-  flex-grow: 1;
-  min-height: 0;
 }
 
 .buttonWrapper {
   margin-top: auto; 
+  
   display: flex;          
   flex-direction: row;    
   align-items: center;    
-  gap: 360px;
+  
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
 }
 
 .title {
@@ -45,8 +47,10 @@
   display: flex;
   flex-direction: column;
   align-items: center; 
-  margin-top: 70px;
+  margin-top: 70px; 
   overflow-y: auto;
-  padding-right: 8px;
-  max-height: calc(100vh - 408px); 
+  max-height: calc(100vh - 380px); 
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
 }

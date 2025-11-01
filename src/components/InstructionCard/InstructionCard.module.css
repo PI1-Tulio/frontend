@@ -1,77 +1,102 @@
 .cardContainer {
-  width: 397px;
-  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  max-width: 400px;
+  width: 100%;
+  /* height: 100px; */
   background-color: #FFFFFF;
-  border: 1px solid #E5E7EB;   
-  position: relative; 
-  margin-bottom: 16px;
+  border: 1px solid #E5E7EB;
+  position: relative;
+  border-radius: 8px;
+  padding: 32px;
   flex-shrink: 0;
 }
 
+.instructionSelectors {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 20px;
+}
+
 .dropdown {
-  position: absolute;
-  top: 17px;
-  left: 17px;
-  width: 86px;
-  height: 64px;
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 0 8px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  padding: 10px;
 }
 
 .title {
-  position: absolute;
-  top: 17px;
-  left: 118px;
-  
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   font-size: 14px;
-  
-  margin: 0;
+  color: #374151;
+}
+
+.valueInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valueInput {
   width: 100px;
-  height: 20px;
-}
-
-.actionTextDefault {
-  position: absolute;
-  left: 118px;
-  bottom: 27px;
-  
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  padding: 0 12px;
   font-family: 'Inter', sans-serif;
-  font-weight: 400; 
-  font-size: 12px;
-  
-  margin: 0;
-  width: 230px; 
+  font-size: 14px;
 }
 
-.actionTextFollow {
-  position: absolute;
-  left: 118px;
-  bottom: 27px;
-  
+.valueInput::-webkit-inner-spin-button,
+.valueInput::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 38px;
+}
+
+.valueInputContainer span {
   font-family: 'Inter', sans-serif;
-  font-weight: 400; 
-  font-size: 12px;
-  
-  margin: 0;
-  width: 110px; 
-  height: 20px; 
+  font-size: 14px;
+  color: #6B7280;
 }
 
-.cmInput {
+.directionSelect {
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+.trashButton {
   position: absolute;
+  top: 16px;
   right: 16px;
-  bottom: 17px;
-  
-  width: 142px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
 }
 
-.trashIcon {
-  position: absolute;
-  top: 17px;
-  right: 11px;
-  
+.trashButton:hover {
+  background-color: #F3F4F6;
+}
+
+.trashButton img {
   width: 20px;
   height: 20px;
-  cursor: pointer;
 }
