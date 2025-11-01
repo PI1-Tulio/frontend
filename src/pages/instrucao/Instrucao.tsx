@@ -4,7 +4,8 @@ import AddButton from '../../components/Button/AddButton';
 import CancelButton from '../../components/CancelButton/CancelButton';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
 import { InstructionCard } from '../../components/InstructionCard/InstructionCard';
-import { useState } from 'react'
+import { useState, useTransition } from 'react';
+import { api } from '../../api/client';
 
 type Instruction = {
   id: number;
@@ -14,6 +15,7 @@ type Instruction = {
 
 export function Instrucao() {
   const [instructions, setInstructions] = useState<Instruction[]>([]);
+  const [isLoading, startTransition] = useTransition();
 
   const handleAddClick = () => {
     const newInstruction: Instruction = {
@@ -32,7 +34,11 @@ export function Instrucao() {
   };
 
   const handleConfirmClick = () => {
-    alert("Botão CONFIRMAR clicado!");
+    startTransition(async () => {
+      console.log("starting");
+      await api.post("/instructions", instructions);
+      console.log("ending");
+    })
   };
 
   const handleDeleteCard = (idToDelete: number) => {
@@ -75,9 +81,9 @@ export function Instrucao() {
           )}
         </div>
         <div className={styles.buttonWrapper}>
-          <CancelButton onClick={handleCancelClick} />
-          <AddButton onClick={handleAddClick} />
-          <ConfirmButton onClick={handleConfirmClick} />
+          <CancelButton onClick={handleCancelClick} disabled={isLoading} />
+          <AddButton onClick={handleAddClick} disabled={isLoading} />
+          <ConfirmButton onClick={handleConfirmClick} disabled={isLoading} />
         </div>
       </div>
     </>
