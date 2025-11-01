@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   padding-bottom: 32px; 
+  flex-grow: 1;
 }
 
 .contentWrapper {
