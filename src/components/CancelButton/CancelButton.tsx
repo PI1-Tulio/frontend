@@ -3,13 +3,11 @@ import styles from './CancelButton.module.css';
 
 import XIcon from '../../assets/icons/x-icon.svg';
 
-interface CancelButtonProps {
-  onClick: () => void;
-}
+type CancelButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export function CancelButton({ onClick }: CancelButtonProps) {
+export function CancelButton(attributes: CancelButtonProps) {
   return (
-    <button className={styles.cancelButton} onClick={onClick}>
+    <button className={styles.cancelButton} {...attributes}>
       <img
         src={XIcon}
         alt="Cancelar"

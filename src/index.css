@@ -1,23 +1,15 @@
 /* src/index.css */
 
-/* * 1. Resets básicos para remover margens e 
- * garantir que o 'box-sizing' seja intuitivo.
- */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/* * 2. Estilos globais para a fonte 
- * (pode copiar o que estava no seu original se preferir) 
- */
 body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  
-  /* IMPORTANTE: Removemos o background-color e o display: flex daqui */
 }
 
 /* * 3. Faz o <div id="root"> (onde o React vive) 
@@ -27,4 +19,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+button:disabled {
+  filter: opacity(0.8);
+  cursor: not-allowed;
 }

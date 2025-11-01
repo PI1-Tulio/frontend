@@ -1,33 +1,39 @@
 .instrucaoContainer {
-  background-color: #E7E6E6;
-  flex-grow: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 75px;
+  justify-content: space-between;
+
+  flex-grow: 1;
+
+  background-color: #E7E6E6;
+  gap: 32px;
+  padding: 32px;
 }
 
 .contentWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 80px; 
+  padding-top: 80px;
 }
 
 .buttonWrapper {
-  margin-top: auto; 
-  display: flex;          
-  flex-direction: row;    
-  align-items: center;    
-  gap: 360px;
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
 }
 
 .title {
   font-family: 'Inter', sans-serif;
-  font-weight: 600; 
+  font-weight: 600;
   font-size: 50px;
   text-align: center;
-  color: #313131; 
+  color: #313131;
 }
 
 .subtitle {
@@ -42,9 +48,8 @@
 .cardListWrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; 
-  margin-top: 70px;
-  overflow-y: auto;
-  max-height: 450px;
-  padding-right: 8px;
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
+  align-items: center;
 }

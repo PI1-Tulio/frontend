@@ -3,13 +3,11 @@ import styles from './ConfirmButton.module.css';
 
 import XIcon from '../../assets/icons/check-icon.svg';
 
-interface ConfirmButtonProps {
-  onClick: () => void;
-}
+type ConfirmButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>
 
-export function ConfirmButton({ onClick }: ConfirmButtonProps) {
+export function ConfirmButton(attributes: ConfirmButtonProps) {
   return (
-    <button className={styles.confirmButton} onClick={onClick}>
+    <button className={styles.confirmButton} {...attributes}>
       <img
         src={XIcon}
         alt="Confirmar"

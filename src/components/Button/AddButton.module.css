@@ -1,8 +1,8 @@
 .addButton {
-  width: 234px;
+  flex: 1;
   height: 74px;
   background-color: #393A39;
-  border-radius: 12px; 
+  border-radius: 12px;
   border: none;
   padding: 0;
   cursor: pointer;
