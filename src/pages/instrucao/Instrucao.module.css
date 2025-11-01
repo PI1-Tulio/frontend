@@ -2,13 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-
-  flex-grow: 1;
-
-  background-color: #E7E6E6;
-  gap: 32px;
-  padding: 32px;
+  padding-bottom: 32px; 
 }
 
 .contentWrapper {
@@ -19,10 +13,12 @@
 }
 
 .buttonWrapper {
-  display: flex;
-  flex-direction: row;
-
-  align-items: center;
+  margin-top: auto; 
+  
+  display: flex;          
+  flex-direction: row;    
+  align-items: center;    
+  
   gap: 16px;
   max-width: 400px;
   width: 100%;
@@ -48,8 +44,11 @@
 .cardListWrapper {
   display: flex;
   flex-direction: column;
+  align-items: center; 
+  margin-top: 70px; 
+  overflow-y: auto;
+  max-height: calc(100vh - 380px); 
   gap: 16px;
   max-width: 400px;
   width: 100%;
-  align-items: center;
 }
