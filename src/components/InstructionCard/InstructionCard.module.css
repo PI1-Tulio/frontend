@@ -1,0 +1,101 @@
+.cardContainer {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+
+  max-width: 400px;
+  width: 100%;
+  /* height: 100px; */
+  background-color: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  position: relative;
+  border-radius: 8px;
+  padding: 32px;
+}
+
+.instructionSelectors {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 20px;
+}
+
+.dropdown {
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  padding: 0 8px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: #374151;
+}
+
+.valueInputContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.valueInput {
+  width: 100px;
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+.valueInput::-webkit-inner-spin-button,
+.valueInput::-webkit-outer-spin-button {
+  opacity: 1;
+  height: 38px;
+}
+
+.valueInputContainer span {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #6B7280;
+}
+
+.directionSelect {
+  height: 42px;
+  border: 1px solid #E5E7EB;
+  border-radius: 4px;
+  padding: 0 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+
+.trashButton {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+}
+
+.trashButton:hover {
+  background-color: #F3F4F6;
+}
+
+.trashButton img {
+  width: 20px;
+  height: 20px;
+}

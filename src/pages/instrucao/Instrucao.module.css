@@ -1,0 +1,54 @@
+.instrucaoContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  flex-grow: 1;
+
+  gap: 32px;
+  padding: 32px;
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 80px;
+}
+
+.buttonWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  text-align: center;
+  color: #313131;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  color: #555555;
+  margin-top: 197px;
+}
+
+.cardListWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 400px;
+  width: 100%;
+}
