@@ -1,13 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './Header.css';
 import { getBatteryInfo } from '../../api/espService';
 
-interface HeaderProps {
-  batteryPercentage?: number;
-  timeRemaining?: string;
-}
-
-const Header: React.FC<HeaderProps> = () => {
+const Header = () => {
   const [batteryPercentage, setBatteryPercentage] = useState<number>(100);
   const [timeRemaining, setTimeRemaining] = useState<number>(60);
 
