@@ -5,7 +5,7 @@ import CancelButton from '../../components/CancelButton/CancelButton';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
 import { InstructionCard } from '../../components/InstructionCard/InstructionCard';
 import { useEffect, useRef, useState, useTransition } from 'react';
-import { api } from '../../api/client';
+import { sendInstructions } from '../../api/espService';
 
 
 import {
@@ -71,9 +71,7 @@ export function Instrucao() {
 
   const handleConfirmClick = () => {
     startTransition(async () => {
-      console.log("starting");
-      await api.post("/instructions", instructions);
-      console.log("ending");
+      await sendInstructions(instructions);
     })
   };
 
