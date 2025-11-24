@@ -9,6 +9,7 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     setupFiles: ['./src/test/setup.ts'],
+    exclude: ['**/node_modules/**', '**/tests/e2e/**'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html'],
@@ -18,7 +19,8 @@ export default defineConfig({
         '**/*.css',
         '**/*.svg',
         'vite.config.ts',
-        'src/assets/**'
+        'src/assets/**',
+        'tests/e2e/**'
       ],
     },
   },

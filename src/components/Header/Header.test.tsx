@@ -1,12 +1,15 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import Header from '../../components/Header/Header'
-import { getBatteryInfo } from '../../api/espService'
+import { getBatteryInfo, getTimeElapsedAfterStartup } from '../../api/espService'
 
 vi.mock('../../api/espService', () => ({
   getBatteryInfo: vi.fn().mockResolvedValue({
     percentage: 100,
     remainingSeconds: 60
+  }),
+  getTimeElapsedAfterStartup: vi.fn().mockResolvedValue({
+    elapsedSecondsAfterStartup: 0
   })
 }))
 

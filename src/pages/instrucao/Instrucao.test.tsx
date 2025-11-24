@@ -84,7 +84,7 @@ describe('Instrucao', () => {
     fireEvent.click(confirmButton)
 
     const mock = vi.mocked(sendInstructions)
-    expect(mock).toHaveBeenCalledWith([{ id: 1, action: 'move', value: 0 }])
+    expect(mock).toHaveBeenCalledWith({ potL: 100, potR: 100, data: [{ id: 1, action: 'move', value: 0 }] })
   })
 
   it('disables buttons during instruction sending', async () => {

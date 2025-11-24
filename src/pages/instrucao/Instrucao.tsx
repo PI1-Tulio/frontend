@@ -32,6 +32,8 @@ type Instruction = {
 
 export function Instrucao() {
   const [instructions, setInstructions] = useState<Instruction[]>([]);
+  const [potL, setPotL] = useState<number>(100);
+  const [potR, setPotR] = useState<number>(100);
   const [isLoading, startTransition] = useTransition();
 
   const buttonsRef = useRef<HTMLDivElement | null>(null);
@@ -71,8 +73,8 @@ export function Instrucao() {
 
   const handleConfirmClick = () => {
     startTransition(async () => {
-      await sendInstructions(instructions);
-    })
+      await sendInstructions({ potL, potR, data: instructions });
+    });
   };
 
   const handleDeleteCard = (idToDelete: number) => {
@@ -102,6 +104,29 @@ export function Instrucao() {
       <div className={styles.instrucaoContainer}>
         <div className={styles.contentWrapper}>
           <h1 className={styles.title}>Insira as Instruções</h1>
+          <div>
+            <div>
+              <label>Potência Roda Esquerda: </label>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={potL}
+                onChange={(e) => setPotL(Number(e.target.value))}
+              />
+            </div>
+
+            <div>
+              <label>Potência Roda Direita: </label>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={potR}
+                onChange={(e) => setPotR(Number(e.target.value))}
+              />
+            </div>
+          </div>
           {instructions.length === 0 ? (
             <p className={styles.subtitle}>As instruções aparecem aqui!</p>
           ) : (
