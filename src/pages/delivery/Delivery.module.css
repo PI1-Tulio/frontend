@@ -1,0 +1,201 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.mainContent {
+  display: flex;
+  gap: 2rem;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.visualizationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.deliveryInfo {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  min-width: 300px;
+}
+
+.deliveryInfo h2 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.5rem;
+}
+
+.deliveryInfo p {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 1rem;
+}
+
+.canvas {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  border: 3px solid #667eea;
+}
+
+.legend {
+  background: white;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legendColor {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.pathColor {
+  background: rgba(102, 126, 234, 0.3);
+  border: 2px solid #667eea;
+}
+
+.executedColor {
+  background: rgba(76, 175, 80, 0.5);
+  border: 2px solid #4caf50;
+}
+
+.carColor {
+  background: #ff5722;
+  border: 2px solid #d84315;
+}
+
+.loading {
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.instructionsSection {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  max-width: 400px;
+  min-width: 300px;
+  max-height: 650px;
+  overflow-y: auto;
+}
+
+.instructionsSection h3 {
+  margin: 0 0 1rem 0;
+  color: #333;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 0.5rem;
+}
+
+.instructionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.instructionItem {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #ccc;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.instructionItem.pending {
+  border-left-color: #ccc;
+  background: #f9f9f9;
+}
+
+.instructionItem.executing {
+  border-left-color: #ff9800;
+  background: #fff3e0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.instructionItem.completed {
+  border-left-color: #4caf50;
+  background: #e8f5e9;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.instructionHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.instructionNumber {
+  font-weight: bold;
+  color: #667eea;
+  font-size: 0.9rem;
+}
+
+.instructionAction {
+  font-weight: 600;
+  color: #333;
+}
+
+.instructionDetails {
+  font-size: 0.85rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+.instructionStatus {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
+.moveIcon {
+  display: inline-block;
+  margin-right: 0.25rem;
+}
+
+.turnIcon {
+  display: inline-block;
+  margin-right: 0.25rem;
+}

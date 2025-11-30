@@ -1,69 +1,18 @@
-import { useCallback, useEffect, useState } from 'react';
 import './Header.css';
-import { getBatteryInfo, getTimeElapsedAfterStartup } from '../../api/espService';
+import { useSocketContext } from '../../context/SocketContext/useContext';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [batteryPercentage, setBatteryPercentage] = useState<number>(100);
-  const [timeRemaining, setTimeRemaining] = useState<number>(60);
-  const [timeFromStartup, setTimeFromStartup] = useState<number>(60);
-
-  useEffect(() => {
-    let timeoutId: number;
-    let active = true;
-
-    const fetchBattery = async () => {
-      if (document.hidden) return; // não busca se aba não visível
-
-      const { percentage, remainingSeconds } = await getBatteryInfo();
-      const { elapsedSecondsAfterStartup } = await getTimeElapsedAfterStartup();
-
-      if (active) {
-        setBatteryPercentage(percentage);
-        setTimeRemaining(remainingSeconds);
-        setTimeFromStartup(elapsedSecondsAfterStartup);
-      }
-    };
-
-    const loop = async () => {
-      await fetchBattery();
-      timeoutId = setTimeout(loop, 5000);
-    };
-
-    loop();
-
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) clearTimeout(timeoutId);
-      else loop();
-    });
-
-    return () => {
-      active = false;
-      clearTimeout(timeoutId);
-    };
-  }, []);
-
-  const formatTime = useCallback((seconds: number) => {
-    const hoursRemaining = Math.floor(seconds / (60 * 60));
-    const minutesRemaining = Math.floor((seconds / 60)) % 60;
-    const secondsRemaining = seconds % 60;
-
-    let formattedString = "";
-    if (hoursRemaining) formattedString += `${hoursRemaining}h`;
-    if (minutesRemaining) formattedString += `${minutesRemaining}m`;
-    if (!hoursRemaining && secondsRemaining) formattedString += `${secondsRemaining}s`
-
-    return formattedString;
-  }, []);
+  const { batteryPercentage } = useSocketContext() || { batteryPercentage: null };
 
   return (
     <header className="header">
       <div className="header-content">
         <div className="left-section">
-          <div className='time-info'>
-            <span className="time-since-startup">
-              {formatTime(timeFromStartup)} desde o início
-            </span>
-          </div>
+          <nav>
+            <Link to="/">Home</Link>
+            <Link to="/deliveries">Entregas</Link>
+          </nav>
         </div>
 
         <div className="right-section">
@@ -71,14 +20,14 @@ const Header = () => {
             <div className="battery-container">
               <div
                 className="battery-level"
-                style={{ width: `${batteryPercentage}%` }}
+                style={{ width: `${batteryPercentage ?? 0}%` }}
               ></div>
             </div>
-            <span className="battery-percentage">{batteryPercentage}%</span>
+            <span className="battery-percentage">{batteryPercentage !== null ? batteryPercentage + '%' : 'loading...'}</span>
           </div>
 
           <div className="time-info">
-            <span className="time-remaining">{formatTime(timeRemaining)}</span>
+
           </div>
         </div>
       </div>

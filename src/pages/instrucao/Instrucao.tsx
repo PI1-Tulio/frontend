@@ -1,12 +1,9 @@
 import styles from './Instrucao.module.css';
-import Header from '../../components/Header/Header';
 import AddButton from '../../components/Button/AddButton';
 import CancelButton from '../../components/CancelButton/CancelButton';
 import ConfirmButton from '../../components/ConfirmButton/ConfirmButton';
 import { InstructionCard } from '../../components/InstructionCard/InstructionCard';
 import { useEffect, useRef, useState, useTransition } from 'react';
-import { sendInstructions } from '../../api/espService';
-
 
 import {
   DndContext,
@@ -22,19 +19,20 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
+import { createDelivery } from '../../api/deliveryService';
+import type { CreateInstructionDTO } from '../../api/DeliveryDTO';
+import { useNavigate } from 'react-router-dom';
 
-type Instruction = {
-  id: number;
-  action: 'move' | 'turn';
-  value: number;
-};
-
+type InstructionCard = CreateInstructionDTO & { id: number };
 
 export function Instrucao() {
-  const [instructions, setInstructions] = useState<Instruction[]>([]);
+  const [instructions, setInstructions] = useState<InstructionCard[]>([]);
   const [potL, setPotL] = useState<number>(100);
   const [potR, setPotR] = useState<number>(100);
   const [isLoading, startTransition] = useTransition();
+  const [name, setName] = useState<string>('Entrega 1');
+
+  const navigate = useNavigate();
 
   const buttonsRef = useRef<HTMLDivElement | null>(null);
   useEffect(() => {
@@ -56,9 +54,9 @@ export function Instrucao() {
   );
 
   const handleAddClick = () => {
-    const newInstruction: Instruction = {
+    const newInstruction: InstructionCard = {
       id: instructions.length + 1,
-      action: 'move',
+      action: 'MOVE',
       value: 0
     };
     setInstructions(currentInstructions => [
@@ -73,7 +71,14 @@ export function Instrucao() {
 
   const handleConfirmClick = () => {
     startTransition(async () => {
-      await sendInstructions({ potL, potR, data: instructions });
+      try {
+        const payload = { potL, potR, instructions, name };
+        console.log("Creating delivery with payload:", payload);
+        const { id } = await createDelivery(payload);
+        navigate(`/delivery/${id}`);
+      } catch (error) {
+        console.error("Error creating delivery:", error);
+      }
     });
   };
 
@@ -100,11 +105,18 @@ export function Instrucao() {
 
   return (
     <>
-      <Header />
       <div className={styles.instrucaoContainer}>
         <div className={styles.contentWrapper}>
           <h1 className={styles.title}>Insira as Instruções</h1>
           <div>
+            <div>
+              <label>Nome da Entrega: </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
             <div>
               <label>Potência Roda Esquerda: </label>
               <input
@@ -149,13 +161,14 @@ export function Instrucao() {
                       value={inst.value}
                       onDelete={handleDeleteCard}
                       onUpdate={(id, action, value) => {
-                        setInstructions(currentInstructions =>
-                          currentInstructions.map(instruction =>
-                            instruction.id === id
-                              ? { ...instruction, action, value }
-                              : instruction
-                          )
-                        );
+                        setInstructions(currentInstructions => {
+                          const instruction = currentInstructions.find((instruction) => instruction.id === id);
+                          if (!instruction) return currentInstructions;
+
+                          instruction.action = action;
+                          instruction.value = value;
+                          return [...currentInstructions];
+                        })
                       }}
                     />
                   ))}

@@ -7,24 +7,24 @@ import { CSS } from '@dnd-kit/utilities';
 interface InstructionCardProps {
   id: number;
   instructionNumber: number;
-  action: 'move' | 'turn';
+  action: 'MOVE' | 'TURN';
   value: number;
   onDelete: (id: number) => void;
-  onUpdate: (id: number, action: 'move' | 'turn', value: number) => void;
+  onUpdate: (id: number, action: 'MOVE' | 'TURN', value: number) => void;
 }
 
 export function InstructionCard({ id, instructionNumber, action, value, onDelete, onUpdate }: InstructionCardProps) {
 
   const handleActionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newAction = event.target.value as 'move' | 'turn';
-    onUpdate(id, newAction, newAction === 'move' ? value : 0);
+    const newAction = event.target.value as 'MOVE' | 'TURN';
+    onUpdate(id, newAction, newAction === 'MOVE' ? value : 0);
   };
 
   const handleValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value ? parseInt(event.target.value.replaceAll(/\D/g, "")) : 0;
 
     if (!isNaN(newValue)) {
-      if (action === 'move') {
+      if (action === 'MOVE') {
         onUpdate(id, action, newValue);
       } else {
         onUpdate(id, action, newValue > 0 ? 1 : 0);
@@ -63,13 +63,13 @@ export function InstructionCard({ id, instructionNumber, action, value, onDelete
           value={action}
           onChange={handleActionChange}
         >
-          <option value="move">↑ Mover</option>
-          <option value="turn">↺ Girar</option>
+          <option value="MOVE">↑ Mover</option>
+          <option value="TURN">↺ Girar</option>
         </select>
 
         <div>
           <h3 className={styles.title}>Instrução {instructionNumber}</h3>
-          {action === 'move' ? (
+          {action === 'MOVE' ? (
             <>
               <div className={styles.valueInputContainer}>
                 <input
