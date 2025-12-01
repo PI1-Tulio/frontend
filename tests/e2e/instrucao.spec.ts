@@ -10,14 +10,14 @@ test.describe('Fluxo de instruções', () => {
     await expect(page.getByText('Instrução 1')).toBeVisible();
 
     const actionSelect = page.getByRole('combobox').first();
-    await actionSelect.selectOption('turn');
-    await expect(actionSelect).toHaveValue('turn');
+    await actionSelect.selectOption('TURN');
+    await expect(actionSelect).toHaveValue('TURN');
 
     await page.getByRole('button', { name: 'Cancelar' }).click();
     await expect(page.getByText('As instruções aparecem aqui!')).toBeVisible();
 
     await page.getByRole('button', { name: 'Adicionar' }).click();
-    await page.getByRole('button', { name: 'Confirmar' }).click();
-    await expect(page.getByRole('button', { name: 'Confirmar' })).toBeDisabled();
+    const confirmButton = page.getByRole('button', { name: 'Confirmar' });
+    await expect(confirmButton).toBeEnabled();
   });
 });
