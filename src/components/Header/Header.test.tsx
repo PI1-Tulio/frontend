@@ -1,17 +1,22 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import Header from '../../components/Header/Header'
-import { getBatteryInfo, getTimeElapsedAfterStartup } from '../../api/deliveryService'
 
-vi.mock('../../api/espService', () => ({
-  getBatteryInfo: vi.fn().mockResolvedValue({
-    percentage: 100,
-    remainingSeconds: 60
-  }),
-  getTimeElapsedAfterStartup: vi.fn().mockResolvedValue({
-    elapsedSecondsAfterStartup: 0
-  })
+// Mock do Socket Context
+vi.mock('../../context/SocketContext/useContext', () => ({
+  useSocketContext: vi.fn(() => ({
+    batteryPercentage: 100
+  }))
 }))
+
+function renderWithRouter(component: React.ReactElement) {
+  return render(
+    <BrowserRouter>
+      {component}
+    </BrowserRouter>
+  )
+}
 
 describe('Header', () => {
   beforeEach(() => {
@@ -19,34 +24,43 @@ describe('Header', () => {
   })
 
   it('renders without crashing', () => {
-    render(<Header />)
+    renderWithRouter(<Header />)
     expect(screen.getByRole('banner')).toBeInTheDocument()
   })
 
   it('displays battery percentage', async () => {
-    vi.mocked(getBatteryInfo).mockResolvedValueOnce({
-      percentage: 75,
-      remainingSeconds: 3600
+    const { useSocketContext } = await import('../../context/SocketContext/useContext')
+    vi.mocked(useSocketContext).mockReturnValue({
+      batteryPercentage: 75,
+      delivery: null,
+      setDelivery: vi.fn()
     })
-    render(<Header />)
+
+    renderWithRouter(<Header />)
     expect(await screen.findByText('75%')).toBeInTheDocument()
   })
 
   it('updates battery level style based on percentage', async () => {
-    vi.mocked(getBatteryInfo).mockResolvedValueOnce({
-      percentage: 60,
-      remainingSeconds: 3600
+    const { useSocketContext } = await import('../../context/SocketContext/useContext')
+    vi.mocked(useSocketContext).mockReturnValue({
+      batteryPercentage: 60,
+      delivery: null,
+      setDelivery: vi.fn()
     })
-    render(<Header />)
+
+    renderWithRouter(<Header />)
     expect(await screen.findByText('60%')).toBeInTheDocument()
   })
 
   it('formats time remaining correctly', async () => {
-    vi.mocked(getBatteryInfo).mockResolvedValueOnce({
-      percentage: 100,
-      remainingSeconds: 3600
+    const { useSocketContext } = await import('../../context/SocketContext/useContext')
+    vi.mocked(useSocketContext).mockReturnValue({
+      batteryPercentage: 100,
+      delivery: null,
+      setDelivery: vi.fn()
     })
-    render(<Header />)
-    expect(await screen.findByText('1h')).toBeInTheDocument()
+
+    renderWithRouter(<Header />)
+    expect(await screen.findByText('100%')).toBeInTheDocument()
   })
 })

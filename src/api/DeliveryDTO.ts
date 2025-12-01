@@ -1,8 +1,8 @@
 type BaseInstruction = {
   id: number;
   actuallyExecuted: number;
-  startTime: string;
-  endTime: string;
+  startTime?: string | null;
+  endTime?: string | null;
   deliveryId: number;
 };
 
@@ -19,8 +19,8 @@ export interface Delivery {
   name: string;
   potL: number;
   potR: number;
-  startTime: string;
-  endTime: string;
+  startTime?: string | null;
+  endTime?: string | null;
 }
 
 export type DeliveryWithInstructions = Delivery & {

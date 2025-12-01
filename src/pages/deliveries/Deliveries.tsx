@@ -19,7 +19,6 @@ export function Deliveries() {
       setLoading(true);
       setError(null);
       const data = await listDeliveries();
-      console.log(data)
       setDeliveries(data);
     } catch (err) {
       setError("Erro ao carregar as entregas. Tente novamente.");
@@ -55,7 +54,7 @@ export function Deliveries() {
     }
   }
 
-  function formatDate(dateString: string | null) {
+  function formatDate(dateString: string | null | undefined) {
     if (!dateString) return "Não iniciada";
 
     const date = new Date(dateString);
@@ -113,7 +112,6 @@ export function Deliveries() {
 
       <div className={styles.deliveriesGrid}>
         {deliveries.map((delivery) => {
-          console.log(delivery)
           const status = getDeliveryStatus(delivery);
 
           return (
@@ -133,7 +131,7 @@ export function Deliveries() {
               </div>
 
               <div className={styles.deliveryInfo}>
-                <div className={styles.infoRow} style={{ marginTop: "0.75rem" }}>
+                <div className={styles.infoRow}>
                   <span className={styles.infoLabel}>🔋 Potências:</span>
                   <div className={styles.potValues}>
                     <div className={styles.potItem}>
@@ -150,7 +148,7 @@ export function Deliveries() {
 
               <div className={styles.deliveryFooter}>
                 <span className={styles.timestamp}>
-                  {delivery.startTime ? formatDate(delivery.startTime) : "Não iniciada"}
+                  {formatDate(delivery.startTime)}
                 </span>
                 <button className={styles.viewButton}>
                   Ver Detalhes →
