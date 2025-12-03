@@ -18,9 +18,9 @@ setInterval(() => {
 
 // Rota que devolve o tempo atual
 app.get("/api/tempo", (req, res) => {
-    res.json({ tempo: tempo.toFixed(2) });
+    res.json({ tempo: tempo.toFixed(0) });
 });
 
 app.listen(port, () => {
-    console.log(`🟢 Mock server rodando em http://localhost:${port}`);
+    console.log(` 🟢 Mock server rodando em http://localhost:${port}`);
 });

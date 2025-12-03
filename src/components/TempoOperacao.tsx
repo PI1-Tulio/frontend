@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const TempoOperacao: React.FC = () => {
     const [tempo, setTempo] = useState<number>(0);
 
-    // Atualiza o tempo pegando do backend
+// Atualiza o tempo pegando do backend
     useEffect(() => {
         let ativo = true;
 
@@ -68,10 +68,11 @@ const TempoOperacao: React.FC = () => {
                     textAlign: "center",
                 }}
             >
-                {tempo.toFixed(2)}s
+                {tempo.toFixed(0)}s
             </div>
         </div>
     );
+
 };
 
 export default TempoOperacao;
