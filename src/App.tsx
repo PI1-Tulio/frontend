@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import { Delivery } from './pages/delivery/Delivery';
 import { SocketProvider } from './context/SocketContext/Provider';
 import { Deliveries } from './pages/deliveries/Deliveries';
+import TempoOperacao from '.components/TempoOperacao;
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
         <Route path="/deliveries" element={<Deliveries />} />
         <Route path="/delivery/:id" element={<Delivery />} />
       </Routes>
+      <TempoOperacao />
     </SocketProvider>
   )
 }
 
-export default App
+export default App;
