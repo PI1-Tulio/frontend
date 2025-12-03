@@ -1,12 +1,23 @@
-import React from "react";
-import TempoOperacao from "./components/TempoOperacao";
+import { Routes, Route } from 'react-router-dom'
+import Instrucao from './pages/instrucao/Instrucao';
+import Header from './components/Header/Header';
+import { Delivery } from './pages/delivery/Delivery';
+import { SocketProvider } from './context/SocketContext/Provider';
+import { Deliveries } from './pages/deliveries/Deliveries';
+import TempoOperacao from '.components/TempoOperacao;
 
 function App() {
-    return (
-        <div>
-            <TempoOperacao />
-        </div>
-    );
+  return (
+    <SocketProvider>
+      <Header />
+      <Routes>
+        <Route path="/" element={<Instrucao />} />
+        <Route path="/deliveries" element={<Deliveries />} />
+        <Route path="/delivery/:id" element={<Delivery />} />
+      </Routes>
+      <TempoOperacao />
+    </SocketProvider>
+  )
 }
 
 export default App;
