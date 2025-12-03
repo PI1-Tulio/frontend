@@ -27,8 +27,7 @@ type InstructionCard = CreateInstructionDTO & { id: number };
 
 export function Instrucao() {
   const [instructions, setInstructions] = useState<InstructionCard[]>([]);
-  const [potL, setPotL] = useState<number>(100);
-  const [potR, setPotR] = useState<number>(100);
+  const [potencia, setPotencia] = useState<number>(200);
   const [isLoading, startTransition] = useTransition();
   const [name, setName] = useState<string>('Entrega 1');
 
@@ -72,7 +71,7 @@ export function Instrucao() {
   const handleConfirmClick = () => {
     startTransition(async () => {
       try {
-        const payload = { potL, potR, instructions, name };
+        const payload = { potL: potencia, potR: potencia, instructions, name };
         console.log("Creating delivery with payload:", payload);
         const { id } = await createDelivery(payload);
         navigate(`/delivery/${id}`);
@@ -118,24 +117,13 @@ export function Instrucao() {
               />
             </div>
             <div>
-              <label>Potência Roda Esquerda: </label>
+              <label>Potência Da Roda: </label>
               <input
                 type="number"
                 min="0"
                 max="100"
-                value={potL}
-                onChange={(e) => setPotL(Number(e.target.value))}
-              />
-            </div>
-
-            <div>
-              <label>Potência Roda Direita: </label>
-              <input
-                type="number"
-                min="0"
-                max="100"
-                value={potR}
-                onChange={(e) => setPotR(Number(e.target.value))}
+                value={potencia}
+                onChange={(e) => setPotencia(Number(e.target.value))}
               />
             </div>
           </div>

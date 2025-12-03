@@ -3,7 +3,6 @@ import { screen, fireEvent } from '@testing-library/react'
 import { renderWithRouter } from '../../test/utils'
 import { Instrucao } from '../../pages/instrucao/Instrucao'
 import { createDelivery } from '../../api/deliveryService'
-import userEvent from '@testing-library/user-event'
 
 vi.mock('../../api/deliveryService', () => ({
   createDelivery: vi.fn().mockResolvedValue({
